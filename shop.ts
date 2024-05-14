@@ -1,6 +1,9 @@
+#! /usr/bin/env node
 import { Console } from "console";
 import inquirer from "inquirer";
 
+
+//available products' price mentioned below
 let prices: any = {
   Apple: 7,
   Banana: 5,
@@ -8,23 +11,30 @@ let prices: any = {
   Grapes: 15,
   Peach: 20,
 };
+
+//products will be pushed to below products array
 let products: any[] = [];
-console.log("-------------------------------------------------------------------");
+console.log(
+  "-------------------------------------------------------------------"
+);
 console.log("Welcome to Online Shopping");
-  console.log("-------------------------------------------------------------------");
+console.log(
+  "-------------------------------------------------------------------"
+);
 async function main() {
-  
-  
   let addToCart;
-  
+
+
+  //Add to Cart - do will run untill add to cart becomes false
   do {
+    //choose products from below
     let availableProducts = await inquirer.prompt({
       name: "products",
       type: "list",
       message: "Please choose from below products",
       choices: ["Apple", "Banana", "Mango", "Grapes", "Peach"],
     });
-
+//choose quantity of products selected above
     let quantity = await inquirer.prompt({
       name: "quantity",
       type: "list",
@@ -32,9 +42,9 @@ async function main() {
       choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     });
 
-    let price = prices[availableProducts.products];
-    let total = price * quantity.quantity;
-    let order = `${availableProducts.products} \t\t ${quantity.quantity} \t\t ${total}`;
+    let price = prices[availableProducts.products]; //price of choosen product
+    let total = price * quantity.quantity; //total price of choosen product
+    let order = `${availableProducts.products} \t\t ${quantity.quantity} \t\t ${total}`; //shopping to be pushed in the product array
     products.push(order);
 
     //Add to Cart
@@ -52,7 +62,9 @@ async function main() {
 
   console.log(`Items \t\t Quantity(PCs) \t Total Price(PKR)`);
 
-  console.log("-------------------------------------------------------------------");
+  console.log(
+    "-------------------------------------------------------------------"
+  );
   products.forEach((item) => {
     console.log(item);
   });
@@ -60,13 +72,11 @@ async function main() {
     name: "action",
     type: "list",
     message: "What would you like to do next?",
-    choices: ["Continue Shopping","Delete Product", "Checkout"],
+    choices: ["Continue Shopping", "Delete Product", "Checkout"],
   });
   if (optionss.action === "Continue Shopping") {
     main();
-  }else 
-
-  if (optionss.action === "Delete Product") {
+  } else if (optionss.action === "Delete Product") {
     let deleteProduct = await inquirer.prompt({
       name: "product",
       type: "list",
@@ -115,7 +125,9 @@ async function main() {
           const price = +item.split("\t\t")[2];
           grandTotal += price;
         });
-        console.log("-------------------------------------------------------------------");
+        console.log(
+          "-------------------------------------------------------------------"
+        );
         console.log(`Grand Total : PKR ${grandTotal}`);
       }
     } else console.log("Invalid selection !");
@@ -127,39 +139,18 @@ async function main() {
 
     console.log(`Items \t\t Quantity(PCs) \t Total Price(PKR)`);
 
-    console.log("-------------------------------------------------------------------");
+    console.log(
+      "-------------------------------------------------------------------"
+    );
     products.forEach((item) => {
       console.log(item);
       const price = +item.split("\t\t")[2];
       grandTotal += price;
     });
-    console.log("-------------------------------------------------------------------");
+    console.log(
+      "-------------------------------------------------------------------"
+    );
     console.log(`Grand Total : PKR ${grandTotal}`);
   }
 }
 main();
-  /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  console.log(`Items \t\t Quantity(PCs) \t Total Price(PKR)`);
-
-  console.log("-----------------------------------------------------------");
-
-  products.forEach((item) => {
-    console.log(item);
-  });
-}
-*/
-
