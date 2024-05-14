@@ -1,4 +1,6 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
+//available products' price mentioned below
 let prices = {
     Apple: 7,
     Banana: 5,
@@ -6,28 +8,32 @@ let prices = {
     Grapes: 15,
     Peach: 20,
 };
+//products will be pushed to below products array
 let products = [];
 console.log("-------------------------------------------------------------------");
 console.log("Welcome to Online Shopping");
 console.log("-------------------------------------------------------------------");
 async function main() {
     let addToCart;
+    //Add to Cart - do will run untill add to cart becomes false
     do {
+        //choose products from below
         let availableProducts = await inquirer.prompt({
             name: "products",
             type: "list",
             message: "Please choose from below products",
             choices: ["Apple", "Banana", "Mango", "Grapes", "Peach"],
         });
+        //choose quantity of products selected above
         let quantity = await inquirer.prompt({
             name: "quantity",
             type: "list",
             message: "Please enter quantity: ",
             choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
         });
-        let price = prices[availableProducts.products];
-        let total = price * quantity.quantity;
-        let order = `${availableProducts.products} \t\t ${quantity.quantity} \t\t ${total}`;
+        let price = prices[availableProducts.products]; //price of choosen product
+        let total = price * quantity.quantity; //total price of choosen product
+        let order = `${availableProducts.products} \t\t ${quantity.quantity} \t\t ${total}`; //shopping to be pushed in the product array
         products.push(order);
         //Add to Cart
         addToCart = await inquirer.prompt({
@@ -111,27 +117,3 @@ async function main() {
     }
 }
 main();
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-console.log(`Items \t\t Quantity(PCs) \t Total Price(PKR)`);
-
-console.log("-----------------------------------------------------------");
-
-products.forEach((item) => {
-  console.log(item);
-});
-}
-*/
