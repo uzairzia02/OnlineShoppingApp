@@ -5,11 +5,12 @@ import inquirer from "inquirer";
 
 //available products' price mentioned below
 let prices: any = {
-  Apple: 7,
-  Banana: 5,
-  Mango: 10,
-  Grapes: 15,
-  Peach: 20,
+  Handsfree: 500,
+  Charger: 400,
+  DataCable: 250,
+  PowerBank: 5000,
+  HeadPhone: 2500,
+  EarBuds: 5800,
 };
 
 //products will be pushed to below products array
@@ -32,7 +33,7 @@ async function main() {
       name: "products",
       type: "list",
       message: "Please choose from below products",
-      choices: ["Apple", "Banana", "Mango", "Grapes", "Peach"],
+      choices: ["Handsfree", "Charger", "DataCable", "PowerBank", "HeadPhone", "EarBuds"],
     });
 //choose quantity of products selected above
     let quantity = await inquirer.prompt({
@@ -53,7 +54,7 @@ async function main() {
       type: "confirm",
       message: "Add more?",
     });
-  } while (addToCart.add);
+  } while (addToCart.add); //run above until add to cart condition become false
 
   //View Cart
   console.log(
